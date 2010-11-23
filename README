@@ -1,0 +1,23 @@
+## Python Algorithms Library
+## Laurent Luce
+
+### Description
+The purpose of this library is to help you with common algorithms like:
+
+String matching:
+  - Naive
+  - Rabin-Karp
+  - Knuth-Morris-Pratt
+  - Boyer-Moore-Horspool
+
+### Installation
+Get the source and run
+
+    $ python setup.py install
+
+### Usage
+To use the Python Algorithms library, just import the modules you need
+like 'import string_matching' in your current python application.
+
+### License
+The Python Algorithms Library is distributed under the MIT License
