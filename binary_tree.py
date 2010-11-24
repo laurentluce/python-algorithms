@@ -25,6 +25,26 @@ class BinaryTree:
   def get_root(self):
     return self.root
 
+  def insert(self, data):
+    node = bt_insert(self.root, data)
+    if self.root == None:
+      self.root = node
+
+  def lookup(self, data):
+    return bt_lookup(self.root, data)
+
+  def delete(self, data):
+    return bt_delete(self.root, data)
+
+  def compare_trees(self, root):
+    return bt_compare_trees(self.root, root)
+
+  def print_tree(self):
+    bt_print_tree(self.root)
+
+  def tree_data(self):
+    return bt_tree_data(self.root)
+
 def bt_insert(root, data):
   """
   Insert new node with data
@@ -59,37 +79,35 @@ def bt_lookup(root, data, parent=None):
   else:
     return root, parent
 
-def bt_compare_trees(t1, t2):
+def bt_compare_trees(root1, root2):
   """
   Compare 2 trees
 
-  @param t1 tree 1
-  @param t2 tree 2
+  @param root1 tree 1 root node
+  @param root2 tree 2 root node
   @returns True if the 2 trees are identical or False
   """
-  if t1 == None and t2 == None:
+  if root1 == None and root2 == None:
     return True
-  elif (t1 == None and t2 != None) or (t1 != None and t2 == None):
+  elif (root1 == None and root2 != None) or (root1 != None and root2 == None):
     return False
   else:
-    return (t1.data == t2.data) \
-        and bt_compare_trees(t1.left, t2.left) \
-        and bt_compare_trees(t1.right, t2.right)
+    return (root1.data == root2.data) \
+        and bt_compare_trees(root1.left, root2.left) \
+        and bt_compare_trees(root1.right, root2.right)
 
 def bt_print_tree(root):
   """
-  Print tree content in order
+  Print tree content inorder
 
   @param root tree root node
   """
-  if root == None:
-    pass
-  else:
+  if root:
     bt_print_tree(root.left)
     print root.data,
     bt_print_tree(root.right)
 
-def bt_tree_data(node):
+def bt_tree_data(root):
   """
   Generator to get the tree nodes data
 
@@ -97,6 +115,7 @@ def bt_tree_data(node):
   """
   # we use a stack to traverse the tree in a non-recursive way
   stack = []
+  node = root
   while stack or node: 
     if node:
       stack.append(node)
