@@ -4,11 +4,20 @@
 ### Description
 The purpose of this library is to help you with common algorithms like:
 
-String matching:
+String matching
   - Naive
   - Rabin-Karp
   - Knuth-Morris-Pratt
   - Boyer-Moore-Horspool
+
+Binary tree
+  - node and tree class
+  - lookup
+  - insert
+  - delete
+  - compare 2 trees
+  - print tree
+  - tree inorder iterator
 
 ### Installation
 Get the source and run

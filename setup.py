@@ -1,14 +1,14 @@
 from distutils.core import setup
 setup(
     name = "pyalgorithms",
-    py_modules = ['string_matching'],
+    py_modules = ['string_matching', 'binary_tree'],
     version = "0.1",
     description = "Python Algorithms",
     author = "Laurent Luce",
     author_email = "laurentluce49@yahoo.com",
     url = "http://github.com/laurentluce/pyalgorithms",
     download_url = "http://github.com/laurentluce/pyalgorithms",
-    keywords = ["pyalgorithms","algorithms"],
+    keywords = ["python-algorithms","algorithms"],
     classifiers = [
         "Programming Language :: Python",
         "Operating System :: OS Independent",
