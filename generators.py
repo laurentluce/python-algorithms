@@ -2,7 +2,6 @@ def fib(n):
   """
   Generator for Fibonacci serie
 
-  Each call to fib() returns the next value in the serie
   Example: for i in fib(5): print i
   @param n fib range upper bound
   """
