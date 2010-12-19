@@ -135,14 +135,14 @@ def bt_delete(root, data):
   # get node containing data
   node, parent = bt_lookup(root, data)
   if node != None:
-    childs_count = bt_childs_count(node)
-    if childs_count == 0:
-      # if node has no childs, just remove it
+    children_count = bt_children_count(node)
+    if children_count == 0:
+      # if node has no children, just remove it
       if bt_which_child(parent, node) == 'left':
         parent.left = None
       else:
         parent.right = None
-    elif childs_count == 1:
+    elif children_count == 1:
       # if node has 1 child
       # replace node by its child
       if node.left:
@@ -152,10 +152,12 @@ def bt_delete(root, data):
         node.data = node.right.data
         node.right = None
     else:
-      # if node has 2 childs
+      # if node has 2 children
       # find its successor
+      parent = node
       successor = node.right
       while successor.left:
+        parent = successor
         successor = successor.left
       node.data = successor.data
       # if the successor has a child, replace it with its child
@@ -164,7 +166,7 @@ def bt_delete(root, data):
         successor.data = successor.right.data
         successor.right = None
       else:
-        node.right = None
+        parent.left = None
 
 def bt_which_child(parent, child):
   """
@@ -180,12 +182,12 @@ def bt_which_child(parent, child):
   else:
     return 'right'
 
-def bt_childs_count(node):
+def bt_children_count(node):
   """
-  Return the number of childs
+  Return the number of children
 
-  @param node node to get nb of childs
-  @returns number of childs: 0, 1, 2
+  @param node node to get nb of children
+  @returns number of children: 0, 1, 2
   """
   if node == None:
     return None

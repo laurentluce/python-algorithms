@@ -27,6 +27,7 @@ class BinaryTreeTest(unittest.TestCase):
     # test lookup
     node, parent = bt.lookup(9)
     self.assertTrue(node == None)
+    # check if returned node and parent are correct
     node, parent = bt.lookup(11)
     self.assertTrue(node.data == 11)
     self.assertTrue(parent.data == 13)
@@ -47,7 +48,7 @@ class BinaryTreeTest(unittest.TestCase):
       t.append(d)
     self.assertEquals(t, [7, 10, 11, 13, 14, 15, 17])
 
-    # delete a node with 2 childs
+    # delete a node with 2 children
     bt.delete(13)
     # check the content of the tree inorder
     t = []
@@ -55,7 +56,7 @@ class BinaryTreeTest(unittest.TestCase):
       t.append(d)
     self.assertEquals(t, [7, 10, 11, 14, 15, 17])
 
-    # delete a node with 2 childs
+    # delete a node with 2 children
     bt.delete(15)
     # check the content of the tree inorder
     t = []
