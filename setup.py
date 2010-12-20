@@ -1,7 +1,7 @@
 from distutils.core import setup
 setup(
     name = "algorithms",
-    py_modules = ['string_matching', 'binary_tree', 'list', 'permutations', 'generators'],
+    packages = ['algorithms'],
     version = "0.1",
     description = "Algorithms implemented in Python",
     author = "Laurent Luce",
