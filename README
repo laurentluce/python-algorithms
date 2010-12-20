@@ -17,16 +17,12 @@ Binary tree
   - delete
   - compare 2 trees
   - print tree
-  - tree inorder iterator
+  - tree inorder generator
 
 ### Installation
 Get the source and run
 
     $ python setup.py install
-
-### Usage
-To use the Python Algorithms library, just import the modules you need
-like 'import string_matching' in your current python application.
 
 ### License
 The Python Algorithms Library is distributed under the MIT License
