@@ -18,7 +18,7 @@ class Node:
 
     @param data node data object to insert
     """
-    elif data < self.data:
+    if data < self.data:
       if self.left == None:
         self.left = Node(data)
       else:
@@ -57,10 +57,10 @@ class Node:
     # get node containing data
     node, parent = self.lookup(data)
     if node != None:
-      children_count = self.children_count(node)
+      children_count = node.children_count()
       if children_count == 0:
         # if node has no children, just remove it
-        if self.which_child(parent, node) == 'left':
+        if parent.left is node:
           parent.left = None
         else:
           parent.right = None
@@ -139,33 +139,16 @@ class Node:
         yield node.data
         node = node.right
 
-  def which_child(self, parent, child):
-    """
-    Test if child is parent's left child or parent's right child
-
-    @param parent parent node
-    @param child parent's child node
-    """
-    if parent == None:
-      return None
-    if parent.left == child:
-      return 'left'
-    else:
-      return 'right'
-
-  def children_count(self, node):
+  def children_count(self):
     """
     Return the number of children
 
-    @param node node to get nb of children
     @returns number of children: 0, 1, 2
     """
-    if node == None:
-      return None
     cnt = 0
-    if node.left:
+    if self.left:
       cnt += 1
-    if node.right:
+    if self.right:
       cnt += 1
     return cnt
 

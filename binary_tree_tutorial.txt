@@ -197,7 +197,7 @@ class Node:
     # get node containing data
     node, parent = self.lookup(data)
     if node != None:
-      children_count = self.children_count(node)
+      children_count = node.children_count()
     ...
 [/code]
 
@@ -215,55 +215,34 @@ Let's tackle the first possibility which is the easiest. We look for the node to
     ...
     if children_count == 0:
       # if node has no children, just remove it
-      if self.which_child(parent, node) == 'left':
+      if parent.left is node:
         parent.left = None
       else:
         parent.right = None
     ...
 [/code]
 
-Note: children_count() returns the number of children of a node. which_child() tells if the node passed is the left child or right child of parent.
+Note: children_count() returns the number of children of a node.
 
 Here is the function children_count:
 
 [code lang="python"]
 class Node:
   ...
-  def children_count(node):
+  def children_count(self):
     """
     Returns the number of children
 
-    @param node node to get nb of children
     @returns number of children: 0, 1, 2
     """
     if node == None:
       return None
     cnt = 0
-    if node.left:
+    if self.left:
       cnt += 1
-    if node.right:
+    if self.right:
       cnt += 1
     return cnt
-[/code]
-
-And which_child():
-
-[code lang="python"]
-class Node:
-  ...
-  def which_child(parent, child):
-    """
-    Test if child is parent's left child or parent's right child
-
-    @param parent parent node
-    @param child parent's child node
-    """
-    if parent == None:
-      return None
-    if parent.left == child:
-      return 'left'
-    else:
-      return 'right'
 [/code]
 
 For example, we want to remove node 1. Node 3 left child will be set to None.
