@@ -26,7 +26,7 @@ class BinaryTreeTest(unittest.TestCase):
 
     # test lookup
     node, parent = root.lookup(9)
-    self.assertTrue(node == None)
+    self.assertTrue(node is None)
     # check if returned node and parent are correct
     node, parent = root.lookup(11)
     self.assertTrue(node.data == 11)

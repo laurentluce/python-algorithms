@@ -77,12 +77,12 @@ class Node:
     @param data node data object to insert
     """
     if data < self.data:
-      if self.left == None:
+      if self.left is None:
         self.left = Node(data)
       else:
         self.left.insert(data)
     else:
-      if self.right == None:
+      if self.right is None:
         self.right = Node(data)
       else:
         self.right.insert(data)
@@ -151,11 +151,11 @@ class Node:
     @returns node and node's parent if found or None, None
     """
     if data < self.data:
-      if self.left == None:
+      if self.left is None:
         return None, None
       return self.left.lookup(data, self)
     elif data > self.data:
-      if self.right == None:
+      if self.right is None:
         return None, None
       return self.right.lookup(data, self)
     else:
@@ -196,7 +196,7 @@ class Node:
     """
     # get node containing data
     node, parent = self.lookup(data)
-    if node != None:
+    if node is not None:
       children_count = node.children_count()
     ...
 [/code]
@@ -235,7 +235,7 @@ class Node:
 
     @returns number of children: 0, 1, 2
     """
-    if node == None:
+    if node is None:
       return None
     cnt = 0
     if self.left:
@@ -347,17 +347,17 @@ class Node:
     @param node tree's root node to compare to
     @returns True if the tree passed is identical to this tree
     """
-    if node == None:
+    if node is None:
       return False
     if self.data != node.data:
       return False
     res = True
-    if self.left == None:
+    if self.left is None:
       if node.left:
         return False
     else:
       res = self.left.compare_trees(node.left)
-    if self.right == None:
+    if self.right is None:
       if node.right:
         return False
     else:
@@ -485,7 +485,7 @@ Does lookup() works?
 [code lang="python"]
     node, parent = root.lookup(9)
     # Node 9 doesn't exist
-    self.assertTrue(node == None)
+    self.assertTrue(node is None)
     # check if returned node and parent are correct
     node, parent = root.lookup(11)
     self.assertTrue(node.data == 11)
