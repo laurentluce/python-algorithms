@@ -19,12 +19,12 @@ class Node:
     @param data node data object to insert
     """
     if data < self.data:
-      if self.left == None:
+      if self.left is None:
         self.left = Node(data)
       else:
         self.left.insert(data)
     else:
-      if self.right == None:
+      if self.right is None:
         self.right = Node(data)
       else:
         self.right.insert(data)
@@ -38,11 +38,11 @@ class Node:
     @returns node and node's parent if found or None, None
     """
     if data < self.data:
-      if self.left == None:
+      if self.left is None:
         return None, None
       return self.left.lookup(data, self)
     elif data > self.data:
-      if self.right == None:
+      if self.right is None:
         return None, None
       return self.right.lookup(data, self)
     else:
@@ -56,7 +56,7 @@ class Node:
     """
     # get node containing data
     node, parent = self.lookup(data)
-    if node != None:
+    if node is not None:
       children_count = node.children_count()
       if children_count == 0:
         # if node has no children, just remove it
@@ -96,17 +96,17 @@ class Node:
     @param node tree to compare
     @returns True if the tree passed is identical to this tree
     """
-    if node == None:
+    if node is None:
       return False
     if self.data != node.data:
       return False
     res = True
-    if self.left == None:
+    if self.left is None:
       if node.left:
         return False
     else:
       res = self.left.compare_trees(node.left)
-    if self.right == None:
+    if self.right is None:
       if node.right:
         return False
     else:
