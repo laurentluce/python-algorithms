@@ -417,7 +417,7 @@ class Node:
 
 For example, we want to access the tree nodes using a for loop:
 [code lang="python"]
-for data in root.tree_data:
+for data in root.tree_data():
   print data
 [/code]
 
