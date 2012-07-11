@@ -61,11 +61,10 @@ class Node:
             if children_count == 0:
                 # if node has no children, just remove it
                 # check if it is not the root node
-                if parent:
-                    if parent.left is node:
-                        parent.left = None
-                    else:
-                        parent.right = None
+                if parent.left is node:
+                    parent.left = None
+                else:
+                    parent.right = None
                 del node
             elif children_count == 1:
                 # if node has 1 child
