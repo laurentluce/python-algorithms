@@ -8,7 +8,6 @@ This article is about a Python library I created to manage binary search trees. 
 <li>Print method</li>
 <li>Comparing 2 trees</li>
 <li>Generator returning the tree elements one by one</li>
-<li>Unit tests suite</li>
 </ul>
 
 You can checkout the library code on GitHub: git clone https://laurentluce@github.com/laurentluce/python-algorithms.git. This folder contains more libraries but we are just going to focus on the Binary Tree one.
@@ -219,6 +218,7 @@ Let's tackle the first possibility which is the easiest. We look for the node to
         parent.left = None
       else:
         parent.right = None
+      del node
     ...
 [/code]
 
@@ -262,11 +262,15 @@ Let's look at the second possibility which is the node to be removed has 1 child
       # if node has 1 child
       # replace node by its child
       if node.left:
-        node.data = node.left.data
-        node.left = None
+          n = node.left
       else:
-        node.data = node.right.data
-        node.right = None
+          n = node.right
+      if parent:
+        if parent.left is node:
+            parent.left = n
+        else:
+            parent.right = n
+      del node
     ...
 [/code]
 
@@ -436,93 +440,5 @@ Let's look at what happens in the code with the same example we have been using:
 <li>8- We pop a node which is Node 3. We yield it (returns 3 and stops here until tree_data() is called again.</li>
 <li>...</li>
 </ul>
-
-<h2>Unit tests suite</h2>
-
-As a good practice, you should always create a test suite for your library or application. I did a lot of unit testing at Tomnica and on Gourmious and it has been a life saver.
-
-We are going to use Python unittest module. We place our test modules in a folder called 'tests' so Python unit testing knows where to look.
-
-Each test module filename needs to start with 'test' and the methods in our test class also.
-
-We create a file named test_binary_tree.py in the folder 'tests' and we add a new class to it derived from unittest.TestCase.
-
-[code lang="python"]
-class NodeTest(unittest.TestCase):
-  def test_binary_tree(self):
-  ...
-[/code]
-
-We are going to add our test cases in the method test_binary_tree.
-
-Let's create 2 identical trees: 
-[code lang="python"]
-    data = [10, 5, 15, 4, 7, 13, 17, 11, 14]
-    # create 2 trees with the same content
-    root = binary_tree.Node(data[0])
-    for i in data[1:]:
-      root.insert(i)
-
-    root2 = binary_tree.Node(data[0])
-    for i in data[1:]:
-      root2.insert(i)
-[/code]
-
-Does compare_trees() returns True? 
-[code lang="python"]
-    self.assertTrue(root.compare_trees(root2))
-[/code]
-
-Does the generator tree_data() returns the nodes inorder?
-[code lang="python"]
-    t = []
-    for d in root.tree_data():
-      t.append(d)
-    self.assertEquals(t, [4, 5, 7, 10, 11, 13, 14, 15, 17])
-[/code]
-
-Does lookup() works? 
-[code lang="python"]
-    node, parent = root.lookup(9)
-    # Node 9 doesn't exist
-    self.assertTrue(node is None)
-    # check if returned node and parent are correct
-    node, parent = root.lookup(11)
-    self.assertTrue(node.data == 11)
-    self.assertTrue(parent.data == 13)
-[/code]
-
-Does deleting a node with no child works?
-[code lang="python"]
-    # delete a leaf node
-    root.delete(4)
-    # check the content of the tree inorder
-    t = []
-    for d in root.tree_data():
-      t.append(d)
-    self.assertEquals(t, [5, 7, 10, 11, 13, 14, 15, 17])
-[/code]
- 
-Does deleting a node with 1 child works?
-[code lang="python"]
-    # delete a node with 1 child
-    root.delete(5)
-    # check the content of the tree inorder
-    t = []
-    for d in root.tree_data():
-      t.append(d)
-    self.assertEquals(t, [7, 10, 11, 13, 14, 15, 17])
-[/code]
- 
-Does deleting a node with 2 children works?
-[code lang="python"]
-    # delete a node with 2 children
-    root.delete(13)
-    # check the content of the tree inorder
-    t = []
-    for d in root.tree_data():
-      t.append(d)
-    self.assertEquals(t, [7, 10, 11, 14, 15, 17])
-[/code]
 
 Here you go, I hope you enjoyed this tutorial. Don't hesitate to add comments if you have any feedback.
