@@ -38,18 +38,18 @@ We need to represent a tree node. To do that, we create a new class named Node w
 
 [code lang="python"]
 class Node:
-  """
-  Tree node: left and right child + data which can be any object
-  """
-  def __init__(self, data):
     """
-    Node constructor
+    Tree node: left and right child + data which can be any object
+    """
+    def __init__(self, data):
+        """
+        Node constructor
 
-    @param data node data object
-    """
-    self.left = None
-    self.right = None
-    self.data = data
+        @param data node data object
+        """
+        self.left = None
+        self.right = None
+        self.data = data
 [/code]
 
 Let's create a tree node containing the integer 8. You can pass any object for the data so it is flexible. When you create a node, both left and right node equal to None.
@@ -68,23 +68,23 @@ We need a method to help us populate our tree. This method takes the node's data
 
 [code lang="python"]
 class Node:
-  ...
-  def insert(self, data):
-    """
-    Insert new node with data
+    ...
+    def insert(self, data):
+        """
+        Insert new node with data
 
-    @param data node data object to insert
-    """
-    if data < self.data:
-      if self.left is None:
-        self.left = Node(data)
-      else:
-        self.left.insert(data)
-    else:
-      if self.right is None:
-        self.right = Node(data)
-      else:
-        self.right.insert(data)
+        @param data node data object to insert
+        """
+        if data < self.data:
+            if self.left is None:
+                self.left = Node(data)
+            else:
+                self.left.insert(data)
+        else:
+            if self.right is None:
+                self.right = Node(data)
+            else:
+                self.right.insert(data)
 [/code]
 
 insert() is called recursively as we are locating the place where to add the new node.
@@ -140,25 +140,25 @@ We need a way to look for a specific node in the tree. We add a new method named
 
 [code lang="python"]
 class Node:
-  ...
-  def lookup(self, data, parent=None):
-    """
-    Lookup node containing data
+    ...
+    def lookup(self, data, parent=None):
+        """
+        Lookup node containing data
 
-    @param data node data object to look up
-    @param parent node's parent
-    @returns node and node's parent if found or None, None
-    """
-    if data < self.data:
-      if self.left is None:
-        return None, None
-      return self.left.lookup(data, self)
-    elif data > self.data:
-      if self.right is None:
-        return None, None
-      return self.right.lookup(data, self)
-    else:
-      return self, parent
+        @param data node data object to look up
+        @param parent node's parent
+        @returns node and node's parent if found or None, None
+        """
+        if data < self.data:
+            if self.left is None:
+                return None, None
+            return self.left.lookup(data, self)
+        elif data > self.data:
+            if self.right is None:
+                return None, None
+            return self.right.lookup(data, self)
+        else:
+            return self, parent
 [/code]
 
 Let's look up the node containing 6.
@@ -186,18 +186,18 @@ The method delete() takes the data of the node to remove as an argument.
 
 [code lang="python"]
 class Node:
-  ...
-  def delete(self, data):
-    """
-    Delete node containing data
-
-    @param data node's content to delete
-    """
-    # get node containing data
-    node, parent = self.lookup(data)
-    if node is not None:
-      children_count = node.children_count()
     ...
+    def delete(self, data):
+        """
+        Delete node containing data
+
+        @param data node's content to delete
+        """
+        # get node containing data
+        node, parent = self.lookup(data)
+        if node is not None:
+            children_count = node.children_count()
+        ...
 [/code]
 
 There are 3 possibilities to handle:
@@ -210,16 +210,16 @@ There are 3 possibilities to handle:
 Let's tackle the first possibility which is the easiest. We look for the node to remove and we set its parent's left or right child to None.
 
 [code lang="python"]
-  def delete(self, data):
-    ...
-    if children_count == 0:
-      # if node has no children, just remove it
-      if parent.left is node:
-        parent.left = None
-      else:
-        parent.right = None
-      del node
-    ...
+    def delete(self, data):
+        ...
+        if children_count == 0:
+            # if node has no children, just remove it
+            if parent.left is node:
+                parent.left = None
+            else:
+                parent.right = None
+            del node
+        ...
 [/code]
 
 Note: children_count() returns the number of children of a node.
@@ -228,21 +228,21 @@ Here is the function children_count:
 
 [code lang="python"]
 class Node:
-  ...
-  def children_count(self):
-    """
-    Returns the number of children
+    ...
+    def children_count(self):
+        """
+        Returns the number of children
 
-    @returns number of children: 0, 1, 2
-    """
-    if node is None:
-      return None
-    cnt = 0
-    if self.left:
-      cnt += 1
-    if self.right:
-      cnt += 1
-    return cnt
+        @returns number of children: 0, 1, 2
+        """
+        if node is None:
+            return None
+        cnt = 0
+        if self.left:
+            cnt += 1
+        if self.right:
+            cnt += 1
+        return cnt
 [/code]
 
 For example, we want to remove node 1. Node 3 left child will be set to None.
@@ -256,22 +256,22 @@ root.delete(1)
 Let's look at the second possibility which is the node to be removed has 1 child. We replace the node's data by its left or right child's data and we set its left or right child to None.
 
 [code lang="python"]
-  def delete(self, data):
-    ...
-    elif children_count == 1:
-      # if node has 1 child
-      # replace node by its child
-      if node.left:
-          n = node.left
-      else:
-          n = node.right
-      if parent:
-        if parent.left is node:
-            parent.left = n
-        else:
-            parent.right = n
-      del node
-    ...
+    def delete(self, data):
+        ...
+        elif children_count == 1:
+            # if node has 1 child
+            # replace node by its child
+            if node.left:
+                    n = node.left
+            else:
+                    n = node.right
+            if parent:
+                if parent.left is node:
+                        parent.left = n
+                else:
+                        parent.right = n
+            del node
+        ...
 [/code]
 
 For example, we want to remove node 14. Node 14 data will be set to 13 (its left child's data) and its left child will be set to None. 
@@ -285,23 +285,23 @@ root.delete(14)
 Let's look at the last possibility which is the node to be removed has 2 children. We replace its data with its successor's data and we fix the successor's parent's child.
 
 [code lang="python"]
-  def delete(self, data):
-    ...
-    else:
-      # if node has 2 children
-      # find its successor
-      parent = node
-      successor = node.right
-      while successor.left:
-        parent = successor
-        successor = successor.left
-      # replace node data by its successor data
-      node.data = successor.data
-      # fix successor's parent's child
-      if parent.left == successor:
-        parent.left = successor.right
-      else:
-        parent.right = successor.right
+    def delete(self, data):
+        ...
+        else:
+            # if node has 2 children
+            # find its successor
+            parent = node
+            successor = node.right
+            while successor.left:
+                parent = successor
+                successor = successor.left
+            # replace node data by its successor data
+            node.data = successor.data
+            # fix successor's parent's child
+            if parent.left == successor:
+                parent.left = successor.right
+            else:
+                parent.right = successor.right
 [/code]
 
 For example, we want to remove node 3. We look for its successor by going right then left until we reach a leaf. Its successor is node 4. We replace 3 with 4. Node 4 doesn't have a child so we set node 6 left child to None.
@@ -318,16 +318,16 @@ We add a method to print the tree inorder. This method has no argument. We use r
 
 [code lang="python"]
 class Node:
-  ...
-  def print_tree(self):
-    """
-    Print tree content inorder
-    """
-    if self.left:
-      self.left.print_tree()
-    print self.data,
-    if self.right:
-      self.right.print_tree()
+    ...
+    def print_tree(self):
+        """
+        Print tree content inorder
+        """
+        if self.left:
+            self.left.print_tree()
+        print self.data,
+        if self.right:
+            self.right.print_tree()
 [/code]
 
 Let's print our tree:
@@ -343,30 +343,30 @@ To compare 2 trees, we add a method which compares each subtree recursively. It 
 
 [code lang="python"]
 class Node:
-  ...
-  def compare_trees(self, node):
-    """
-    Compare 2 trees
+    ...
+    def compare_trees(self, node):
+        """
+        Compare 2 trees
 
-    @param node tree's root node to compare to
-    @returns True if the tree passed is identical to this tree
-    """
-    if node is None:
-      return False
-    if self.data != node.data:
-      return False
-    res = True
-    if self.left is None:
-      if node.left:
-        return False
-    else:
-      res = self.left.compare_trees(node.left)
-    if self.right is None:
-      if node.right:
-        return False
-    else:
-      res = self.right.compare_trees(node.right)
-    return res
+        @param node tree's root node to compare to
+        @returns True if the tree passed is identical to this tree
+        """
+        if node is None:
+            return False
+        if self.data != node.data:
+            return False
+        res = True
+        if self.left is None:
+            if node.left:
+                return False
+        else:
+            res = self.left.compare_trees(node.left)
+        if self.right is None:
+            if node.right:
+                return False
+        else:
+            res = self.right.compare_trees(node.right)
+        return res
 [/code]
 
 For example, we want to compare tree (3, 8, 10) with tree (3, 8, 11)
@@ -401,28 +401,28 @@ Here is the code:
 
 [code lang="python"]
 class Node:
-  ...
-  def tree_data(self):
-    """
-    Generator to get the tree nodes data
-    """
-    # we use a stack to traverse the tree in a non-recursive way
-    stack = []
-    node = self
-    while stack or node: 
-      if node:
-        stack.append(node)
-        node = node.left
-      else: # we are returning so we pop the node and we yield it
-        node = stack.pop()
-        yield node.data
-        node = node.right
+    ...
+    def tree_data(self):
+        """
+        Generator to get the tree nodes data
+        """
+        # we use a stack to traverse the tree in a non-recursive way
+        stack = []
+        node = self
+        while stack or node: 
+            if node:
+                stack.append(node)
+                node = node.left
+            else: # we are returning so we pop the node and we yield it
+                node = stack.pop()
+                yield node.data
+                node = node.right
 [/code]
 
 For example, we want to access the tree nodes using a for loop:
 [code lang="python"]
 for data in root.tree_data():
-  print data
+    print data
 [/code]
 
 Let's look at what happens in the code with the same example we have been using:
