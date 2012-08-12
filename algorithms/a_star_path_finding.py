@@ -115,7 +115,7 @@ class AStar(object):
         heapq.heappush(self.op, (self.start.f, self.start))
         while len(self.op):
             # pop cell from heap queue 
-            h, cell = heapq.heappop(self.op)
+            f, cell = heapq.heappop(self.op)
             # add cell to closed list so we don't process it twice
             self.cl.add(cell)
             # if ending cell, display found path
@@ -126,7 +126,7 @@ class AStar(object):
             adj_cells = self.get_adjacent_cells(cell)
             for c in adj_cells:
                 if c.reachable and c not in self.cl:
-                    if c in self.op:
+                    if (c.f, c) in self.op:
                         # if adj cell in open list, check if current path is
                         # better than the one previously found
                         # for this adj cell.
