@@ -23,7 +23,7 @@ class Node:
                 self.left = Node(data)
             else:
                 self.left.insert(data)
-        else:
+        elif data > self.data:
             if self.right is None:
                 self.right = Node(data)
             else:
@@ -60,7 +60,6 @@ class Node:
             children_count = node.children_count()
             if children_count == 0:
                 # if node has no children, just remove it
-                # check if it is not the root node
                 if parent.left is node:
                     parent.left = None
                 else:
@@ -73,10 +72,11 @@ class Node:
                     n = node.left
                 else:
                     n = node.right
-                if parent.left is node:
-                    parent.left = n
-                else:
-                    parent.right = n
+                if parent:
+                    if parent.left is node:
+                        parent.left = n
+                    else:
+                        parent.right = n
                 del node
             else:
                 # if node has 2 children
@@ -111,6 +111,8 @@ class Node:
                 return False
         else:
             res = self.left.compare_trees(node.left)
+        if res is False:
+            return False
         if self.right is None:
             if node.right:
                 return False
