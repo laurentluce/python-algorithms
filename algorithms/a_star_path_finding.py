@@ -19,18 +19,18 @@ class Cell(object):
 
 class AStar(object):
     def __init__(self):
-        self.op = []
-        heapq.heapify(self.op)
-        self.cl = set()
+        self.opened = []
+        heapq.heapify(self.opened)
+        self.closed = set()
         self.cells = []
-        self.gridHeight = 6
-        self.gridWidth = 6
+        self.grid_height = 6
+        self.grid_width = 6
 
     def init_grid(self):
         walls = ((0, 5), (1, 0), (1, 1), (1, 5), (2, 3), 
                  (3, 1), (3, 2), (3, 5), (4, 1), (4, 4), (5, 1))
-        for x in range(self.gridWidth):
-            for y in range(self.gridHeight):
+        for x in range(self.grid_width):
+            for y in range(self.grid_height):
                 if (x, y) in walls:
                     reachable = False
                 else:
@@ -57,7 +57,7 @@ class AStar(object):
         @param y cell y coordinate
         @returns cell
         """
-        return self.cells[x * self.gridHeight + y]
+        return self.cells[x * self.grid_height + y]
 
     def get_adjacent_cells(self, cell):
         """
@@ -68,13 +68,13 @@ class AStar(object):
         @returns adjacent cells list 
         """
         cells = []
-        if cell.x < self.gridWidth-1:
+        if cell.x < self.grid_width-1:
             cells.append(self.get_cell(cell.x+1, cell.y))
         if cell.y > 0:
             cells.append(self.get_cell(cell.x, cell.y-1))
         if cell.x > 0:
             cells.append(self.get_cell(cell.x-1, cell.y))
-        if cell.y < self.gridHeight-1:
+        if cell.y < self.grid_height-1:
             cells.append(self.get_cell(cell.x, cell.y+1))
         return cells
 
@@ -112,30 +112,30 @@ class AStar(object):
 
     def process(self):
         # add starting cell to open heap queue
-        heapq.heappush(self.op, (self.start.f, self.start))
-        while len(self.op):
+        heapq.heappush(self.opened, (self.start.f, self.start))
+        while len(self.opened):
             # pop cell from heap queue 
-            f, cell = heapq.heappop(self.op)
+            f, cell = heapq.heappop(self.opened)
             # add cell to closed list so we don't process it twice
-            self.cl.add(cell)
+            self.closed.add(cell)
             # if ending cell, display found path
             if cell is self.end:
                 self.display_path()
                 break
             # get adjacent cells for cell
             adj_cells = self.get_adjacent_cells(cell)
-            for c in adj_cells:
-                if c.reachable and c not in self.cl:
-                    if (c.f, c) in self.op:
+            for adj_cell in adj_cells:
+                if adj_cell.reachable and adj_cell not in self.closed:
+                    if (adj_cell.f, adj_cell) in self.opened:
                         # if adj cell in open list, check if current path is
                         # better than the one previously found
                         # for this adj cell.
-                        if c.g > cell.g + 10:
-                            self.update_cell(c, cell)
+                        if adj_cell.g > cell.g + 10:
+                            self.update_cell(adj_cell, cell)
                     else:
-                        self.update_cell(c, cell)
+                        self.update_cell(adj_cell, cell)
                         # add adj cell to open list
-                        heapq.heappush(self.op, (c.f, c))
+                        heapq.heappush(self.opened, (adj_cell.f, adj_cell))
 
 a = AStar()
 a.init_grid()
