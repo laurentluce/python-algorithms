@@ -18,16 +18,19 @@ class Node:
 
         @param data node data object to insert
         """
-        if data < self.data:
-            if self.left is None:
-                self.left = Node(data)
-            else:
-                self.left.insert(data)
-        elif data > self.data:
-            if self.right is None:
-                self.right = Node(data)
-            else:
-                self.right.insert(data)
+        if self.data:
+            if data < self.data:
+                if self.left is None:
+                    self.left = Node(data)
+                else:
+                    self.left.insert(data)
+            elif data > self.data:
+                if self.right is None:
+                    self.right = Node(data)
+                else:
+                    self.right.insert(data)
+        else:
+            self.data = data
 
     def lookup(self, data, parent=None):
         """
@@ -60,11 +63,14 @@ class Node:
             children_count = node.children_count()
             if children_count == 0:
                 # if node has no children, just remove it
-                if parent.left is node:
-                    parent.left = None
+                if parent:
+                    if parent.left is node:
+                        parent.left = None
+                    else:
+                        parent.right = None
+                    del node
                 else:
-                    parent.right = None
-                del node
+                    self.data = None
             elif children_count == 1:
                 # if node has 1 child
                 # replace node by its child
@@ -77,7 +83,11 @@ class Node:
                         parent.left = n
                     else:
                         parent.right = n
-                del node
+                    del node
+                else:
+                    self.left = n.left
+                    self.right = n.right
+                    self.data = n.data
             else:
                 # if node has 2 children
                 # find its successor

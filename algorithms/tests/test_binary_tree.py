@@ -64,6 +64,22 @@ class BinaryTreeTest(unittest.TestCase):
       t.append(d)
     self.assertEquals(t, [7, 10, 11, 14, 17])
 
+    # check for root deletion
+    root = binary_tree.Node(1)
+    root.insert(2)
+    root.insert(0)
+    root.delete(1)
+    self.assertEquals(root.data, 2)
+    root.delete(2)
+    self.assertEquals(root.data, 0)
+    root.delete(0)
+    self.assertEquals(root.data, None)
+    root.insert(1)
+    self.assertEquals(root.data, 1)
+    self.assertEquals(root.left, None)
+    self.assertEquals(root.right, None)
+
+
 if __name__ == '__main__':
   unittest.main()
 
