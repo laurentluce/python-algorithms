@@ -129,7 +129,7 @@ class Node:
         else:
             res = self.right.compare_trees(node.right)
         return res
-                
+
     def print_tree(self):
         """
         Print tree content inorder
@@ -147,7 +147,7 @@ class Node:
         # we use a stack to traverse the tree in a non-recursive way
         stack = []
         node = self
-        while stack or node: 
+        while stack or node:
             if node:
                 stack.append(node)
                 node = node.left
@@ -168,3 +168,4 @@ class Node:
         if self.right:
             cnt += 1
         return cnt
+
