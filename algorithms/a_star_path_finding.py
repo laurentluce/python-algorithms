@@ -104,20 +104,6 @@ class AStar(object):
         path.reverse()
         return path
 
-    def compare(self, cell1, cell2):
-        """
-        Compare 2 cells F values
-
-        @param cell1 1st cell
-        @param cell2 2nd cell
-        @returns -1, 0 or 1 if lower, equal or greater
-        """
-        if cell1.f < cell2.f:
-            return -1
-        elif cell1.f > cell2.f:
-            return 1
-        return 0
-
     def update_cell(self, adj, cell):
         """
         Update adjacent cell

@@ -1,7 +1,7 @@
 def permutations(l):
     """
     Generator for list permutations
-    
+
     @param l list to generate permutations for
     @result yield each permutation
 
@@ -25,7 +25,3 @@ def permutations(l):
         for p in permutations(l):
             for i in range(len(p)+1):
                 yield p[:i] + a + p[i:]
-
-for p in permutations([1,2,3]):
-    print p
-

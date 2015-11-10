@@ -1,8 +1,8 @@
 import unittest
-import string_matching
+import algorithms.string_matching as string_matching
 
 class StringMatchingTest(unittest.TestCase):
-    
+
   def test_string_matching_naive(self):
         t = 'ababbababa'
         s = 'aba'
