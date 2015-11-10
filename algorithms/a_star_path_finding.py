@@ -5,9 +5,13 @@ class Cell(object):
         """
         Initialize new cell
 
+        @param reachable is cell reachable? not a wall?
         @param x cell x coordinate
         @param y cell y coordinate
-        @param reachable is cell reachable? not a wall?
+        @param g cost to move from the starting cell to this cell.
+        @param h estimation of the cost to move from this cell
+                 to the ending cell.
+        @param f f = g + h
         """
         self.reachable = reachable
         self.x = x
@@ -19,16 +23,28 @@ class Cell(object):
 
 class AStar(object):
     def __init__(self):
+        # open list
         self.opened = []
         heapq.heapify(self.opened)
+        # visited cells list
         self.closed = set()
+        # grid cells
         self.cells = []
-        self.grid_height = 6
-        self.grid_width = 6
+        self.grid_height = None
+        self.grid_width = None
 
-    def init_grid(self):
-        walls = ((0, 5), (1, 0), (1, 1), (1, 5), (2, 3), 
-                 (3, 1), (3, 2), (3, 5), (4, 1), (4, 4), (5, 1))
+    def init_grid(self, width, height, walls, start, end):
+        """
+        Prepare grid cells, walls.
+
+        @param width grid's width.
+        @param height grid's height.
+        @param walls list of wall x,y tuples.
+        @param start grid starting point x,y tuple.
+        @param end grid ending point x,y tuple.
+        """
+        self.grid_height = height
+        self.grid_width = width
         for x in range(self.grid_width):
             for y in range(self.grid_height):
                 if (x, y) in walls:
@@ -36,15 +52,14 @@ class AStar(object):
                 else:
                     reachable = True
                 self.cells.append(Cell(x, y, reachable))
-        self.start = self.get_cell(0, 0)
-        self.end = self.get_cell(5, 5)
+        self.start = self.get_cell(*start)
+        self.end = self.get_cell(*end)
 
     def get_heuristic(self, cell):
         """
         Compute the heuristic value H for a cell: distance between
         this cell and the ending cell multiply by 10.
 
-        @param cell
         @returns heuristic value H
         """
         return 10 * (abs(cell.x - self.end.x) + abs(cell.y - self.end.y))
@@ -65,7 +80,7 @@ class AStar(object):
         from the one on the right.
 
         @param cell get adjacent cells for this cell
-        @returns adjacent cells list 
+        @returns adjacent cells list.
         """
         cells = []
         if cell.x < self.grid_width-1:
@@ -78,11 +93,16 @@ class AStar(object):
             cells.append(self.get_cell(cell.x, cell.y+1))
         return cells
 
-    def display_path(self):
+    def get_path(self):
         cell = self.end
+        path = [(cell.x, cell.y)]
         while cell.parent is not self.start:
             cell = cell.parent
-            print 'path: cell: %d,%d' % (cell.x, cell.y)
+            path.append((cell.x, cell.y))
+
+        path.append((self.start.x, self.start.y))
+        path.reverse()
+        return path
 
     def compare(self, cell1, cell2):
         """
@@ -97,7 +117,7 @@ class AStar(object):
         elif cell1.f > cell2.f:
             return 1
         return 0
-    
+
     def update_cell(self, adj, cell):
         """
         Update adjacent cell
@@ -110,18 +130,22 @@ class AStar(object):
         adj.parent = cell
         adj.f = adj.h + adj.g
 
-    def process(self):
+    def solve(self):
+        """
+        Solve maze, find path to ending cell.
+
+        @returns path or None if not found.
+        """
         # add starting cell to open heap queue
         heapq.heappush(self.opened, (self.start.f, self.start))
         while len(self.opened):
-            # pop cell from heap queue 
+            # pop cell from heap queue
             f, cell = heapq.heappop(self.opened)
             # add cell to closed list so we don't process it twice
             self.closed.add(cell)
-            # if ending cell, display found path
+            # if ending cell, return found path
             if cell is self.end:
-                self.display_path()
-                break
+                return self.get_path()
             # get adjacent cells for cell
             adj_cells = self.get_adjacent_cells(cell)
             for adj_cell in adj_cells:
@@ -137,7 +161,4 @@ class AStar(object):
                         # add adj cell to open list
                         heapq.heappush(self.opened, (adj_cell.f, adj_cell))
 
-a = AStar()
-a.init_grid()
-a.process()
 
