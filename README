@@ -4,20 +4,22 @@
 ### Description
 The purpose of this library is to help you with common algorithms like:
 
-String matching
-  - Naive
-  - Rabin-Karp
-  - Knuth-Morris-Pratt
-  - Boyer-Moore-Horspool
+A* path finding.
 
 Binary tree
-  - node and tree class
+  - node class
   - lookup
   - insert
   - delete
   - compare 2 trees
   - print tree
   - tree inorder generator
+
+String matching
+  - Naive
+  - Rabin-Karp
+  - Knuth-Morris-Pratt
+  - Boyer-Moore-Horspool
 
 ### Installation
 Get the source and run
