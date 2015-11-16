@@ -21,6 +21,13 @@ String matching
   - Knuth-Morris-Pratt
   - Boyer-Moore-Horspool
 
+Generators
+  - Permutations.
+
+Lists
+  - Subset with highest sum.
+  - Find integer in sorted list.
+
 ### Installation
 Get the source and run
 
