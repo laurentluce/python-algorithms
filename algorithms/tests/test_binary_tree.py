@@ -1,6 +1,8 @@
 import copy
 import unittest
+
 import algorithms.binary_tree as binary_tree
+
 
 class BinaryTreeTest(unittest.TestCase):
 
@@ -157,8 +159,7 @@ class BinaryTreeTest(unittest.TestCase):
 
     def test_tree_data(self):
         self.assertEqual([e for e in self.root.tree_data()],
-            [3, 5, 7, 10, 11, 12, 15, 20])
+                         [3, 5, 7, 10, 11, 12, 15, 20])
 
 if __name__ == '__main__':
-  unittest.main()
-
+    unittest.main()

@@ -1,9 +1,9 @@
 import heapq
 
+
 class Cell(object):
     def __init__(self, x, y, reachable):
-        """
-        Initialize new cell
+        """Initialize new cell.
 
         @param reachable is cell reachable? not a wall?
         @param x cell x coordinate
@@ -21,6 +21,7 @@ class Cell(object):
         self.h = 0
         self.f = 0
 
+
 class AStar(object):
     def __init__(self):
         # open list
@@ -34,8 +35,7 @@ class AStar(object):
         self.grid_width = None
 
     def init_grid(self, width, height, walls, start, end):
-        """
-        Prepare grid cells, walls.
+        """Prepare grid cells, walls.
 
         @param width grid's width.
         @param height grid's height.
@@ -56,17 +56,16 @@ class AStar(object):
         self.end = self.get_cell(*end)
 
     def get_heuristic(self, cell):
-        """
-        Compute the heuristic value H for a cell: distance between
-        this cell and the ending cell multiply by 10.
+        """Compute the heuristic value H for a cell.
+
+        Distance between this cell and the ending cell multiply by 10.
 
         @returns heuristic value H
         """
         return 10 * (abs(cell.x - self.end.x) + abs(cell.y - self.end.y))
 
     def get_cell(self, x, y):
-        """
-        Returns a cell from the cells list
+        """Returns a cell from the cells list.
 
         @param x cell x coordinate
         @param y cell y coordinate
@@ -75,9 +74,9 @@ class AStar(object):
         return self.cells[x * self.grid_height + y]
 
     def get_adjacent_cells(self, cell):
-        """
-        Returns adjacent cells to a cell. Clockwise starting
-        from the one on the right.
+        """Returns adjacent cells to a cell.
+
+        Clockwise starting from the one on the right.
 
         @param cell get adjacent cells for this cell
         @returns adjacent cells list.
@@ -105,8 +104,7 @@ class AStar(object):
         return path
 
     def update_cell(self, adj, cell):
-        """
-        Update adjacent cell
+        """Update adjacent cell.
 
         @param adj adjacent cell to current cell
         @param cell current cell being processed
@@ -117,8 +115,7 @@ class AStar(object):
         adj.f = adj.h + adj.g
 
     def solve(self):
-        """
-        Solve maze, find path to ending cell.
+        """Solve maze, find path to ending cell.
 
         @returns path or None if not found.
         """
@@ -146,5 +143,3 @@ class AStar(object):
                         self.update_cell(adj_cell, cell)
                         # add adj cell to open list
                         heapq.heappush(self.opened, (adj_cell.f, adj_cell))
-
-

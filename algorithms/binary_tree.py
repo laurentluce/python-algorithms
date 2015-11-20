@@ -1,10 +1,12 @@
-class Node:
-    """
-    Tree node: left and right child + data which can be any object
+from __future__ import print_function
+
+
+class Node(object):
+    """Tree node: left and right child + data which can be any object
+
     """
     def __init__(self, data):
-        """
-        Node constructor
+        """Node constructor
 
         @param data node data object
         """
@@ -13,8 +15,7 @@ class Node:
         self.data = data
 
     def insert(self, data):
-        """
-        Insert new node with data
+        """Insert new node with data
 
         @param data node data object to insert
         """
@@ -33,8 +34,7 @@ class Node:
             self.data = data
 
     def lookup(self, data, parent=None):
-        """
-        Lookup node containing data
+        """Lookup node containing data
 
         @param data node data object to look up
         @param parent node's parent
@@ -52,8 +52,7 @@ class Node:
             return self, parent
 
     def delete(self, data):
-        """
-        Delete node containing data
+        """Delete node containing data
 
         @param data node's content to delete
         """
@@ -68,7 +67,6 @@ class Node:
                         parent.left = None
                     else:
                         parent.right = None
-                    del node
                 else:
                     self.data = None
             elif children_count == 1:
@@ -83,7 +81,6 @@ class Node:
                         parent.left = n
                     else:
                         parent.right = n
-                    del node
                 else:
                     self.left = n.left
                     self.right = n.right
@@ -105,8 +102,7 @@ class Node:
                     parent.right = successor.right
 
     def compare_trees(self, node):
-        """
-        Compare 2 trees
+        """Compare 2 trees
 
         @param node tree to compare
         @returns True if the tree passed is identical to this tree
@@ -131,18 +127,18 @@ class Node:
         return res
 
     def print_tree(self):
-        """
-        Print tree content inorder
+        """Print tree content inorder
+
         """
         if self.left:
             self.left.print_tree()
-        print self.data,
+        print(self.data, end=" ")
         if self.right:
             self.right.print_tree()
 
     def tree_data(self):
-        """
-        Generator to get the tree nodes data
+        """Generator to get the tree nodes data
+
         """
         # we use a stack to traverse the tree in a non-recursive way
         stack = []
@@ -151,14 +147,14 @@ class Node:
             if node:
                 stack.append(node)
                 node = node.left
-            else: # we are returning so we pop the node and we yield it
+            else:
+                # we are returning so we pop the node and we yield it
                 node = stack.pop()
                 yield node.data
                 node = node.right
 
     def children_count(self):
-        """
-        Return the number of children
+        """Return the number of children
 
         @returns number of children: 0, 1, 2
         """
@@ -168,4 +164,3 @@ class Node:
         if self.right:
             cnt += 1
         return cnt
-

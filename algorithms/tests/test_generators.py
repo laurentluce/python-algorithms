@@ -1,5 +1,7 @@
 import unittest
+
 import algorithms.generators as generators
+
 
 class GeneratorsTest(unittest.TestCase):
 
@@ -16,5 +18,4 @@ class GeneratorsTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  unittest.main()
-
+    unittest.main()

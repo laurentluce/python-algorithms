@@ -1,7 +1,7 @@
 """Run all of the tests."""
-import os
 import sys
 import unittest2 as unittest
+
 
 def main(args=None):
     unittest_dir = '.'

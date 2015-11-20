@@ -1,6 +1,5 @@
 def permutations(l):
-    """
-    Generator for list permutations
+    """Generator for list permutations.
 
     @param l list to generate permutations for
     @result yield each permutation

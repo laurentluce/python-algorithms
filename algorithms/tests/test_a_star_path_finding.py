@@ -1,5 +1,7 @@
-import unittest
 import algorithms.a_star_path_finding as pf
+
+import unittest
+
 
 class Test(unittest.TestCase):
 
@@ -31,5 +33,4 @@ class Test(unittest.TestCase):
         self.assertIsNone(a.solve())
 
 if __name__ == '__main__':
-  unittest.main()
-
+    unittest.main()

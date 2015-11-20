@@ -1,5 +1,7 @@
 import unittest
+
 import algorithms.permutations as permutations
+
 
 class GeneratorsTest(unittest.TestCase):
 
@@ -17,5 +19,4 @@ class GeneratorsTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  unittest.main()
-
+    unittest.main()

@@ -1,6 +1,5 @@
 def find_int(i, l):
-    """
-    Find integer in a sorted list.
+    """Find integer in a sorted list.
 
     Example: 4 in [1, 3, 4, 6, 7, 9] -> 2
     @param i integer to find.
@@ -23,9 +22,9 @@ def find_int(i, l):
             if res:
                 return res + p_idx
 
+
 def find_max_sub(l):
-    """
-    Find subset with higest sum
+    """Find subset with higest sum.
 
     Example: [-2, 3, -4, 5, 1, -5] -> (3,4), 6
     @param l list

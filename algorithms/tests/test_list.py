@@ -1,5 +1,7 @@
 import unittest
+
 import algorithms.list as list
+
 
 class List(unittest.TestCase):
 
@@ -24,7 +26,7 @@ class List(unittest.TestCase):
         self.assertIsNone(idx)
 
     def test_find_int_single_element_list(self):
-        idx = list.find_int(3, [3,])
+        idx = list.find_int(3, [3, ])
         self.assertEqual(idx, 0)
 
     def test_find_int_empty_list(self):
@@ -32,5 +34,4 @@ class List(unittest.TestCase):
         self.assertIsNone(idx)
 
 if __name__ == '__main__':
-  unittest.main()
-
+    unittest.main()
