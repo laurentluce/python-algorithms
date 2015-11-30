@@ -33,5 +33,17 @@ class List(unittest.TestCase):
         idx = list.find_int(3, [])
         self.assertIsNone(idx)
 
+    def test_merge_sort(self):
+        res = list.merge_sort([3, 4, 1, 5, 0])
+        self.assertListEqual(res, [0, 1, 3, 4, 5])
+
+    def test_merge_sort_duplicates(self):
+        res = list.merge_sort([3, 4, 1, 5, 0, 4])
+        self.assertListEqual(res, [0, 1, 3, 4, 4, 5])
+
+    def test_merge_sort_single_element(self):
+        res = list.merge_sort([3])
+        self.assertListEqual(res, [3])
+
 if __name__ == '__main__':
     unittest.main()

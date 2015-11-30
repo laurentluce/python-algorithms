@@ -47,3 +47,48 @@ def find_max_sub(l):
             m = 0
             s = i+1
     return bounds, max
+
+
+def merge_sort(l):
+    """Sort list using merge sort.
+
+    @param l list to sort.
+    @returns sorted list.
+    """
+    def merge(l1, l2):
+        """Merge sorted lists l1 and l2.
+
+        [1, 2, 4], [1, 3, 4, 5] -> [1, 1, 2, 3, 4, 5]
+        @param l1 sorted list
+        @param l2 sorted list
+        @returns merge sorted list
+        """
+        res = []
+        i = 0
+        j = 0
+        while i < len(l1) and j < len(l2):
+            if l1[i] <= l2[j]:
+                res.append(l1[i])
+                i += 1
+            elif l2[j] < l1[i]:
+                res.append(l2[j])
+                j += 1
+
+        while i < len(l1):
+            res.append(l1[i])
+            i += 1
+
+        while j < len(l2):
+            res.append(l2[j])
+            j += 1
+
+        return res
+
+    length = len(l)
+    if length <= 1:
+        return l
+    mid = length / 2
+    h1 = merge_sort(l[:mid])
+    h2 = merge_sort(l[mid:])
+
+    return merge(h1, h2)
