@@ -30,6 +30,8 @@ Generators
 Lists
   - Subset with highest sum.
   - Find integer in sorted list.
+  - Merge sort.
+  - Quicksort.
 
 ### Installation
 Get the source and run

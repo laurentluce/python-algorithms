@@ -45,5 +45,18 @@ class List(unittest.TestCase):
         res = list.merge_sort([3])
         self.assertListEqual(res, [3])
 
+    def test_quicksort(self):
+        res = list.quicksort([3, 4, 1, 5, 0])
+        self.assertListEqual(res, [0, 1, 3, 4, 5])
+
+    def test_quicksort_duplicates(self):
+        res = list.quicksort([3, 4, 1, 5, 4, 0, 1])
+        self.assertListEqual(res, [0, 1, 1, 3, 4, 4, 5])
+
+    def test_quicksort_single_element(self):
+        res = list.quicksort([3])
+        self.assertListEqual(res, [3])
+
+
 if __name__ == '__main__':
     unittest.main()

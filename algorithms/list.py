@@ -52,6 +52,8 @@ def find_max_sub(l):
 def merge_sort(l):
     """Sort list using merge sort.
 
+    Complexity: O(n log n)
+
     @param l list to sort.
     @returns sorted list.
     """
@@ -92,3 +94,29 @@ def merge_sort(l):
     h2 = merge_sort(l[mid:])
 
     return merge(h1, h2)
+
+
+def quicksort(l):
+    """Sort list using quick sort.
+
+    Complexity: O(n log n).  Worst: O(n2)
+
+    @param l list to sort.
+    @returns sorted list.
+    """
+    if len(l) <= 1:
+        return l
+
+    pivot = l[0]
+    less = []
+    equal = []
+    greater = []
+    for e in l:
+        if e < pivot:
+            less.append(e)
+        elif e == pivot:
+            equal.append(e)
+        else:
+            greater.append(e)
+
+    return quicksort(less) + equal + quicksort(greater)
