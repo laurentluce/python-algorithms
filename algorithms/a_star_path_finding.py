@@ -21,6 +21,9 @@ class Cell(object):
         self.h = 0
         self.f = 0
 
+    def __lt__(self, other):
+        return self.f < other.f
+
 
 class AStar(object):
     def __init__(self):
