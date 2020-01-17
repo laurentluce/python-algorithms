@@ -6,14 +6,6 @@ The purpose of this library is to help you with common algorithms like:
 
 A* path finding.
 
-Binary tree
-  - lookup.
-  - insert.
-  - delete.
-  - compare 2 trees.
-  - print tree.
-  - tree inorder generator.
-
 String Matching
   - Naive.
   - Rabin-Karp.
@@ -26,12 +18,6 @@ String
 
 Generators
   - Permutations.
-
-Lists
-  - Subset with highest sum.
-  - Find integer in sorted list.
-  - Merge sort.
-  - Quicksort.
 
 ### Installation
 Get the source and run
