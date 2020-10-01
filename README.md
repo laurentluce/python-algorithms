@@ -1,5 +1,5 @@
-## Python Algorithms Library
-## Laurent Luce
+### Python Algorithms Library
+### Laurent Luce
 
 ### Description
 The purpose of this library is to help you with common algorithms like:
@@ -19,7 +19,7 @@ String
 Generators
   - Permutations.
 
-### Installation
+### Installation of Python Library
 Get the source and run
 
     $ python setup.py install
