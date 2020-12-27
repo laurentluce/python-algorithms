@@ -187,11 +187,11 @@ def reverse_string_words(s):
     @param s string words to reverse.
     @returns reversed string words.
     """
-    def reverse(l, i, j):
+    def reverse(lst, i, j):
         # 'word1' -> '1drow'
         # Complexity: O(n/2)
         while i != j:
-            l[i], l[j] = l[j], l[i]
+            lst[i], lst[j] = lst[j], lst[i]
             i += 1
             j -= 1
 
