@@ -19,10 +19,9 @@ String
 Generators
   - Permutations.
 
-### Installation
-Get the source and run
+### Tests
 
-    $ python setup.py install
+    $ ./pants test ::
 
 ### License
 The Python Algorithms Library is distributed under the MIT License
