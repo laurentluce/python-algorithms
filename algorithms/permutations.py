@@ -1,3 +1,4 @@
+from builtins import range
 def permutations(lst):
     """Generator for list permutations.
 
