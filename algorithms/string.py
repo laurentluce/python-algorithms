@@ -1,4 +1,3 @@
-from builtins import range
 def string_matching_naive(text='', pattern=''):
     """Returns positions where pattern is found in text.
 

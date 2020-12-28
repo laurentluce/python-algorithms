@@ -13,7 +13,7 @@ root_patterns = ["/"]
 # The default interpreter compatibility for code in this repo. Individual targets can override
 #  this with the `interpreter_constraints` field. See
 #  https://www.pantsbuild.org/docs/python-interpreter-compatibility.
-interpreter_constraints = [">=3.6"]
+interpreter_constraints = ["==2.7.*", ">=3.6"]
 # Use a constraints file. See https://www.pantsbuild.org/docs/python-third-party-dependencies.
 requirement_constraints = "constraints.txt"
 # We search for interpreters on both on the $PATH and in the `$(pyenv root)/versions` folder.
@@ -24,3 +24,7 @@ interpreter_search_paths = ["<PATH>", "<PYENV>"]
 
 [flake8]
 config = "build-support/.flake8"
+
+[pytest]
+version = "pytest>=4.0,<6.1"
+pytest_plugins = ["zipp>=1.2"]
