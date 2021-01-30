@@ -1,7 +1,7 @@
 def string_matching_naive(text='', pattern=''):
     """Returns positions where pattern is found in text.
 
-    We slide the string to match 'pattern' over the text
+    Sliding window.
 
     O((n-m)m)
     Example: text = 'ababbababa', pattern = 'aba'
@@ -23,6 +23,11 @@ def string_matching_naive(text='', pattern=''):
 
 def string_matching_rabin_karp(text='', pattern='', hash_base=256):
     """Returns positions where pattern is found in text.
+
+    Similar to the naive approach but matches the hash value of the pattern
+    with the hash value of current substring of text.  Needs to match
+    individual characters once a match is found because of potential
+    hash collisions.
 
     worst case: O(nm)
     O(n+m) if the number of valid matches is small and the pattern is large.
@@ -75,6 +80,8 @@ def hash_value(s, base):
 def string_matching_knuth_morris_pratt(text='', pattern=''):
     """Returns positions where pattern is found in text.
 
+    https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
+
     O(m+n)
     Example: text = 'ababbababa', pattern = 'aba'
         string_matching_knuth_morris_pratt(text, pattern) returns [0, 5, 7]
@@ -114,6 +121,8 @@ def compute_prefix_function(p):
 
 def string_matching_boyer_moore_horspool(text='', pattern=''):
     """Returns positions where pattern is found in text.
+
+    https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string-search_algorithm
 
     O(n)
     Performance: ord() is slow so we shouldn't use it here
