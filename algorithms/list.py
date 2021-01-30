@@ -1,45 +1,45 @@
-def find_int(i, l):
+def find_int(i, lst):
     """Find integer in a sorted list.
 
     Example: 4 in [1, 3, 4, 6, 7, 9] -> 2
     @param i integer to find.
-    @param l sorted list.
+    @param lst sorted list.
     @returns index if found, None if not.
     """
-    if l:
-        p_idx = len(l) / 2
-        p = l[p_idx]
+    if lst:
+        p_idx = len(lst) / 2
+        p = lst[p_idx]
         if i == p:
             return p_idx
-        elif len(l) == 1:
+        elif len(lst) == 1:
             return
         elif i < p:
-            res = find_int(i, l[:p_idx])
+            res = find_int(i, lst[:p_idx])
             if res:
                 return res
         elif i > p:
-            res = find_int(i, l[p_idx:])
+            res = find_int(i, lst[p_idx:])
             if res:
                 return res + p_idx
 
 
-def find_max_sub(l):
+def find_max_sub(lst):
     """Find subset with higest sum.
 
     Example: [-2, 3, -4, 5, 1, -5] -> (3,4), 6
-    @param l list
+    @param lst list
     @returns subset bounds and highest sum
     """
     # max sum
-    max = l[0]
+    max = lst[0]
     # current sum
     m = 0
     # max sum subset bounds
     bounds = (0, 0)
     # current subset start
     s = 0
-    for i in range(len(l)):
-        m += l[i]
+    for i in range(len(lst)):
+        m += lst[i]
         if m > max:
             max = m
             bounds = (s, i)
@@ -49,7 +49,7 @@ def find_max_sub(l):
     return bounds, max
 
 
-def merge_sort(l):
+def merge_sort(lst):
     """Sort list using merge sort.
 
     Complexity: O(n log n)
@@ -86,32 +86,32 @@ def merge_sort(l):
 
         return res
 
-    length = len(l)
+    length = len(lst)
     if length <= 1:
-        return l
+        return lst
     mid = length / 2
-    h1 = merge_sort(l[:mid])
-    h2 = merge_sort(l[mid:])
+    h1 = merge_sort(lst[:mid])
+    h2 = merge_sort(lst[mid:])
 
     return merge(h1, h2)
 
 
-def quicksort(l):
+def quicksort(lst):
     """Sort list using quick sort.
 
     Complexity: O(n log n).  Worst: O(n2)
 
-    @param l list to sort.
+    @param lst list to sort.
     @returns sorted list.
     """
-    if len(l) <= 1:
-        return l
+    if len(lst) <= 1:
+        return lst
 
-    pivot = l[0]
+    pivot = lst[0]
     less = []
     equal = []
     greater = []
-    for e in l:
+    for e in lst:
         if e < pivot:
             less.append(e)
         elif e == pivot:

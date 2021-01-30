@@ -32,5 +32,6 @@ class Test(unittest.TestCase):
         a.init_grid(6, 6, walls, (0, 0), (5, 5))
         self.assertIsNone(a.solve())
 
+
 if __name__ == '__main__':
     unittest.main()
