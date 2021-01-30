@@ -19,6 +19,14 @@ String
 Generators
   - Permutations.
 
+Lists
+  - Find integer using binary search.
+  - Find subset with max sum.
+  - Merge sort.
+  - Quicksort.
+
+Binary tree
+
 ### Tests
 
     $ ./pants test ::
