@@ -24,7 +24,7 @@ def find_int(i, lst):
 
 
 def find_max_sub(lst):
-    """Find subset with higest sum.
+    """Find subset with highest sum.
 
     Example: [-2, 3, -4, 5, 1, -5] -> (3,4), 6
     @param lst list
